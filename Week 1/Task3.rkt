@@ -5,8 +5,7 @@
      [(negative? c) error "The number of products was negative"]
      [(negative? k) error "John's hosting capacity was negative"]
      [(negative? w) error "The weight of a product was negative"]
-     [(<= (* c w) k) #t]
-     [(> (* c w) k) #f]
+     [else (<= (* c w) k)]
      )
   )
 

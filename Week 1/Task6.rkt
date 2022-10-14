@@ -7,9 +7,9 @@
      (helper (quotient n 10) (+ (* curr-res 10) (remainder n 10)))
   )
     )
-  (cond
-    [(negative? n) error "The number is negative"]
-    [else (helper n 0)]
+  (if (negative? n)
+    (error "The number is negative")
+    (helper n 0)
     )
   )
 

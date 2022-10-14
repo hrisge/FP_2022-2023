@@ -1,17 +1,17 @@
 #lang racket
 
 (define (snail desired-height day-distance night-distance)
-  (define (helper desired-height day-dist night-dist starter counter)
-    (if (>= (+ starter day-dist) desired-height)
+  (define (helper starter counter)
+    (if (>= (+ starter day-distance) desired-height)
         (add1 counter)
-        (helper desired-height day-dist night-dist (- (+ starter day-dist) night-dist) (add1 counter)
+        (helper (- (+ starter day-distance) night-distance) (add1 counter)
         )
     )
   )
   (cond
     [(and (>= night-distance day-distance) (> desired-height day-distance)) error "Snail will never reach the end"]
     [(negative? day-distance) error "Snail will never reach the end"]
-    [else (helper desired-height day-distance night-distance 0 0)]
+    [else (helper 0 0)]
     )
   )
 
