@@ -2,7 +2,7 @@
 
 (define (rev n)
   (define (helper n curr-res)
-   (if (= n 0)
+   (if (zero? n)
      curr-res
      (helper (quotient n 10) (+ (* curr-res 10) (remainder n 10)))
   )

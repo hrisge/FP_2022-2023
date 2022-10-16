@@ -2,9 +2,9 @@
 
 (define (can-carry? c k w)
   (cond
-     [(negative? c) error "The number of products was negative"]
-     [(negative? k) error "John's hosting capacity was negative"]
-     [(negative? w) error "The weight of a product was negative"]
+     [(negative? c) (error "The number of products was negative")]
+     [(negative? k) (error "John's hosting capacity was negative")]
+     [(negative? w) (error "The weight of a product was negative")]
      [else (<= (* c w) k)]
      )
   )

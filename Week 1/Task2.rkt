@@ -1,14 +1,15 @@
 #lang racket
 
 (define (leap-year-one-line?  year)
-  (or (and (= (remainder year 4) 0) (not (zero? (remainder year 100)))) (= (remainder year 400) 0))
+  (or (and (zero? (remainder year 4)) (not (zero? (remainder year 100)))) (zero? (remainder year 400))
+  )
   )
 
 (define (is-leap-year-guards? year)
   (cond
-    [(= (remainder year 400) 0) #t]
-    [(= (remainder year 100) 0) #f]
-    [(= (remainder year 4) 0) #t]
+    [(zero? (remainder year 400)) #t]
+    [(zero? (remainder year 100)) #f]
+    [(zero? (remainder year 4)) #t]
     [else #f]
     )
   )
