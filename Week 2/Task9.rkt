@@ -1,10 +1,12 @@
 #lang racket
 
+(require math/number-theory)
+
 (define (max-multiple d b)
   (define (helper num)
     (cond
       [(= 1 num) num]
-      [(and (zero? (remainder num d)) (<= num b)) num]
+      [(and (divides? d num)  (<= num b)) num]
       [else (helper (sub1 num))]
     )
     )

@@ -8,7 +8,7 @@
     (cond
       [(zero? counter) 0]
       [(= counter 1) 0]
-      [(and (prime? counter) (zero? (remainder n counter))) (+ counter (helper (sub1 counter)))]
+      [(and (prime? counter) (divides? counter n)) (+ counter (helper (sub1 counter)))]
       [else (helper (sub1 counter))]
        )
     )

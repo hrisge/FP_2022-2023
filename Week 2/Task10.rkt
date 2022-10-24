@@ -7,10 +7,9 @@
        (length-of-number (quotient n 10) (add1 counter))
        )
     )
-  (cond
-    [(or (zero? n) (negative? n)) (error "n was not natural")]
-    [(= (remainder (* n n) (expt 10 (length-of-number n 0))) n) #t]
-    [else #f]
+  (if (or (zero? n) (negative? n))
+    (error "n was not natural")
+    (= (remainder (* n n) (expt 10 (length-of-number n 0))) n)
     )
   )
 

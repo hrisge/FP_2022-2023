@@ -1,20 +1,19 @@
 #lang racket
 
+(require math/number-theory)
+(require racket/trace)
+
 (define (find-sum a b n)
-  (define (helper counter n-buff)
-      (cond
-        [(= n-buff 1) (+ a b)]
-        [else (+ (* (expt 2 n) b counter) (helper (add1 counter) (sub1 n-buff)))]
-        )
+  (define (helper counter)
+   (cond
+     [(<= counter (- n 3)) (+ (* 3 b (expt 2 counter)) (helper (add1 counter)))]
+     [(= counter (- n 2)) (+ (* 2 b (expt 2 counter)) (helper (add1 counter)))]
+     [(= counter (sub1 n)) (* b (expt 2 counter))]
+     )
     )
-
-  (cond
-    [(or (negative? a) (negative? b) (< n 4)) (error "a and n must be possitive and b must be more than 3")]
-    [else (helper 1 n)]
-    )
-
-  )
-
+  (trace helper)
+  (+ (* 3 a) (helper 0))
+)
 
 
 (= (find-sum 0 2 10) 3578) ; 510 + 1022 + 2046

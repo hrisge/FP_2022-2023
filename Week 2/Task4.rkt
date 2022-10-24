@@ -31,20 +31,18 @@
   )
 
 (define (num-palindromes-iter a b)
-  (define (helper cnt current-number)
+  (define (helper new-start new-finish result)
     (cond
-      [(and (= current-number b) (palindrome? current-number)) (add1 cnt)]
-      [(and (= current-number b)) cnt]
-      [(palindrome? current-number) (helper (add1 cnt) (add1 current-number))]
-      [else (helper cnt (add1 current-number))]
+      [(> new-start new-finish) result]
+      [(palindrome? new-start) (helper (add1 new-start) new-finish (add1 result))]
+      [else (helper (add1 new-start) new-finish result)]
       )
-  )
-
-  (cond
-    [(or (negative? a) (negative? b)) (error "Interval must be possitive numbers")]
-    [(< b a) (num-palindromes-rec b a)]
-    [else (helper 0 a)]
     )
+
+  (if (or (negative? a) (negative? b))
+      (error "Interval must be possitive numbers")
+      (helper (min a b) (max a b) 0)
+      )
   )
 
 (= (num-palindromes-rec 1 101) 19)

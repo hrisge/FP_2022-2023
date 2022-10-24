@@ -1,5 +1,7 @@
 #lang racket
 
+(require math/number-theory)
+
 (define (interesting? n)
   (define (sum-of-digits cut-number result)
     (if (not (zero? cut-number))
@@ -7,10 +9,9 @@
         result
       )
     )
-  (cond
-    [(negative? n) (error "n must be possitive")]
-    [(zero? (remainder n (sum-of-digits n 0))) #t]
-    [else #f]
+  (if (negative? n)
+    (error "n must be possitive")
+    (divides? (sum-of-digits n 0) n)
       )
   )
 
