@@ -1,14 +1,7 @@
 #lang racket
 
 (define (kth-max-min xs)
-
-  (define (get-ith-el xs i)
-    (cond
-      [(empty? xs) (error "No such number")]
-      [(= 1 i) (car xs)]
-      [else (get-ith-el (cdr xs) (sub1 i))]))
-
-  (λ (x) (get-ith-el (sort (remove-duplicates (filter negative? xs)) >) x)) )
+  (λ (x) (list-ref (sort (remove-duplicates (filter negative? xs)) >) (sub1 x))) )
 
 
 (= ((kth-max-min '(-1)) 1) -1)
