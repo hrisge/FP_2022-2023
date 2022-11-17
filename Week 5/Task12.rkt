@@ -1,11 +1,12 @@
 #lang racket
 
 (define (my-list-ref xs i)
-  (cond
-    [(or (negative? i) (> i (length xs))) (error "Invalid index!")]
-    [(zero? i) (car xs)]
-    [else (my-list-ref (cdr xs) (sub1 i))])
+  (if (and (not (negative? i)) (list? (drop xs i)))
+      (car (drop xs i))
+      (error "Invalid index!")
+      )
   )
+  
 
 
 (= (my-list-ref '(1 2 3) 0) 1)

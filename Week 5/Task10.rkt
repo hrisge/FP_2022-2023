@@ -9,8 +9,10 @@
         (helper (append results (list (car leftovers))) (cdr leftovers) (sub1 i)))
         )
 
-
-    (helper null xs i)
+  (if (> i (length xs))
+      (error "Invalid index!")
+      (helper null xs i)
+      )
     )
 
 
@@ -23,4 +25,4 @@
 (equal? (insert-at 7 0 '(1 2 3)) '(7 1 2 3))
 (equal? (insert-at 7 1 '(1 2 3)) '(1 7 2 3))
 (equal? (insert-at 7 3 '(1 2 3)) '(1 2 3 7))
-;(insert-at 7 4 '(1 2 3)) ; error: Invalid index!
+(insert-at 7 4 '(1 2 3)) ; error: Invalid index!
