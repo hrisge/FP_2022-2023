@@ -7,12 +7,9 @@
   (define (helper result leftover-fs leftover-xs)
     (cond
       [(and (empty? leftover-fs) (empty? leftover-xs)) result]
-      [(and (= 1 (length leftover-fs)) (= 1 (length leftover-xs))) (helper (append result (λ (x) ((first leftover-fs) (first leftover-xs) x))) (cdr leftover-fs) (cdr leftover-xs))]
+      [(and (= 1 (length leftover-fs)) (= 1 (length leftover-xs))) (helper (append result (list (λ (x) ((first leftover-fs) (first leftover-xs) x)))) (cdr leftover-fs) (cdr leftover-xs))]
       [else (helper (append result (list (λ (x) ((first leftover-fs) (first leftover-xs) ((second leftover-fs) (second leftover-xs) x))))) (cddr leftover-fs) (cddr leftover-xs))]      
       ))
-  (trace helper)
-
-  
 
   (define (helper-two res functions n)
     (if (empty? functions)
@@ -22,11 +19,6 @@
 
   (λ (x) (helper-two 0 (helper null fs xs) x))
   )
-(trace pair-compose)
-
-
-
-
 
  ;((f1 x1).(f2 x2) y) + ((f3 x3).(f4 x4) y) + ... + ((fn-1 xn-1).(fn xn) y)
 
