@@ -6,6 +6,4 @@ main = do
 
 hasIncDigits :: Int -> Bool
 hasIncDigits 0 = True
-hasIncDigits x
- | mod x 10 >= mod (div x 10) 10 = hasIncDigits (div x 10)
- | otherwise = False
+hasIncDigits x = mod x 10 >= mod (div x 10) 10 && hasIncDigits (div x 10)

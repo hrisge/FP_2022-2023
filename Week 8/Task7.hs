@@ -7,6 +7,4 @@ main = do
 
 
 isPerfect :: Integer -> Bool
-isPerfect num 
- | num == 1 = False
- | otherwise = num == (foldl1 (+) (filter (\x -> (mod num x == 0)) [1..num-1]))  
+isPerfect num = num == sum [ c | c <- [1..num-1] , mod num c == 0 && num /= 1]

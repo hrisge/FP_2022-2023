@@ -8,7 +8,7 @@ main = do
     print $ areAmicable 6232 6368 == True
 
 sumOfDivisors :: Int -> Int
-sumOfDivisors num = foldl1 (+) (filter (\x -> (mod num x == 0)) [1..num])
+sumOfDivisors num = sum [c | c <- [1..num], mod num c == 0]
 
 areAmicable :: Int -> Int -> Bool
 areAmicable x y = sumOfDivisors x == sumOfDivisors y  
