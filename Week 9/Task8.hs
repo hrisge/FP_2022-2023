@@ -1,4 +1,5 @@
 import Data.Char
+import Data.List
 
 main :: IO()
 main = do
@@ -8,11 +9,11 @@ isDuplicate :: Char -> Char -> Bool
 isDuplicate x y = (((isLower x && isUpper y)) || (isUpper x && isLower y)) && (toUpper x == toUpper y)
 
 reduceStr :: [Char] -> [Char]
-reduceStr str = (helper str [])
+reduceStr str = reverse (helper str [])
  where 
     helper :: [Char] -> [Char] -> [Char]
-    helper leftover result
-     | length leftover == 1 = result ++ [(head leftover)]
-     | null leftover = result
-     | isDuplicate (head leftover) (head (tail leftover)) = helper (result ++ (tail (tail leftover))) []
-     | otherwise = helper (tail leftover) (result ++ [head leftover])                                                           
+    helper [] result = result
+    helper (l:leftover) [] = helper leftover [l]
+    helper (l:leftover) (r:result)
+     | not $ isDuplicate l r = helper leftover ([l] ++ [r] ++ result)
+     | isDuplicate l r = helper leftover result                                                             

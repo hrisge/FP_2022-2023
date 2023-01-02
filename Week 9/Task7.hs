@@ -1,4 +1,5 @@
 import Data.Char
+import Data.List
 
 main :: IO()
 main = do
@@ -15,23 +16,9 @@ main = do
     print $ duplicateCount (['a'..'z'] ++ ['A'..'Z']) == 26
 
 
-firstElementHasDuplicates :: [Char] -> Bool
-firstElementHasDuplicates xs = elem (head xs) (tail xs)
-
-removeElement :: [Char] -> Char -> [Char]
-removeElement xs x = helper xs x []
- where
-    helper :: [Char] -> Char -> [Char] -> [Char]
-    helper xs x res
-     | null xs = res
-     | head xs /= x = helper (tail xs) x (res ++ [head xs])
-     | otherwise = helper (tail xs) x res
+countOccurrences :: String -> [(Char, Int)]
+countOccurrences = map (\ ys -> (head ys, length ys)) . group . sort . map toLower
 
 duplicateCount :: [Char] -> Int
-duplicateCount str = helper (map toLower str) 0
- where 
-    helper :: [Char] -> Int -> Int
-    helper str res
-     | null str = res
-     | firstElementHasDuplicates str = helper (removeElement str (head str)) (res + 1)
-     | otherwise = helper (tail str) res
+duplicateCount [] = 0
+duplicateCount str = length $ filter (\ (x, y) -> y > 1) $ countOccurrences str

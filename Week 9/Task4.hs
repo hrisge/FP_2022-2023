@@ -7,4 +7,4 @@ isPrimeLC :: Int -> Bool
 isPrimeLC x = x /= 1 && (notElem True [0 == mod x c | c <- [2..x-1]])
 
 primesInRange :: Int -> Int -> [Int]
-primesInRange x y = filter (\z -> isPrimeLC z) [(min x y)..(max y x)]
+primesInRange x y = filter isPrimeLC [min x y..max y x]

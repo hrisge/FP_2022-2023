@@ -18,23 +18,18 @@ main = do
     print $ mergeLinearXs [7, 8, 9] [1, 2, 3] == [1,2,3,7,8,9]
     print $ mergeLinearXs [7, 9, 11] [8, 10, 12] == [7,8,9,10,11,12]
 
+
+
 mergeLinearRec :: [Int] -> [Int] -> [Int]
-mergeLinearRec xs ys = helper xs ys []
+mergeLinearRec xs ys = nub (helper xs ys [])
  where 
     helper :: [Int] -> [Int] -> [Int] -> [Int]
-    helper xs ys res
-     | null xs && null ys = res
-     | null xs = res ++ ys
-     | null ys = res ++ xs
-     | head xs < head ys = helper (tail xs) ys (res ++ [head xs])
-     | head xs == head ys = helper (tail xs) (tail ys) (res ++ [head xs])
-     | otherwise = helper xs (tail ys) (res ++ [head ys])
-
-removeDuplicates :: [Int] -> [Int] -> [Int]
-removeDuplicates res xs
- | null xs = res
- | elem (head xs) res = removeDuplicates (tail xs) res
- | otherwise = removeDuplicates (tail xs) (res ++ [head xs])
+    helper [] [] res = res
+    helper [] ys res = res ++ ys
+    helper xs [] res = res ++ xs
+    helper (x:xs) (y:ys) res
+     | x <= y = helper xs ([y] ++ ys) (res ++ [x])
+     | otherwise = helper ([x] ++ xs) ys (res ++ [y])
 
 mergeLinearXs :: [Int] -> [Int] -> [Int]
-mergeLinearXs xs ys = sort $ removeDuplicates [] $ xs ++ ys
+mergeLinearXs xs ys = sort $ nub $ xs ++ ys
