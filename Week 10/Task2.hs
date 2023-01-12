@@ -7,4 +7,4 @@ removeFirst :: Int -> [Int] -> [Int]
 removeFirst el [] = []
 removeFirst el (x:xs)
  | x == el = xs
- | otherwise = [x] ++ removeFirst el xs    
+ | otherwise = x : removeFirst el xs    

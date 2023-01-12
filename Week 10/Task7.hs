@@ -28,7 +28,7 @@ main = do
     print $ isSortedXs [-1, -2, -3, -4, -5, -6] == True
 
 isSortedXs :: [Int] -> Bool
-isSortedXs xs = xs == (sort xs) || (reverse xs) == (sort xs) 
+isSortedXs xs = xs == sort xs || reverse xs == sort xs
 
 isSorted :: [Int] -> Bool
 isSorted xs = isSortedComp xs (>=) || isSortedComp xs (<=)
@@ -36,4 +36,4 @@ isSorted xs = isSortedComp xs (>=) || isSortedComp xs (<=)
 isSortedComp :: [Int] -> (Int -> Int -> Bool) -> Bool
 isSortedComp [] _ = True
 isSortedComp [x] _ = True
-isSortedComp (fst:snd:xs) comp = comp fst snd && isSortedComp ( snd : xs ) comp
+isSortedComp (fst:snd:xs) comp = comp fst snd && isSortedComp (snd:xs) comp

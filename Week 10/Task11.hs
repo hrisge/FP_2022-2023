@@ -5,4 +5,4 @@ main = do
 
 subLists :: [Int] -> Int -> [[Int]]
 subLists [] _ = []
-subLists xs a = [take a xs] ++ subLists (drop a xs) a
+subLists xs y = take y xs : subLists (drop y xs) y

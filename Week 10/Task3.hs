@@ -19,4 +19,4 @@ removeAll :: Int -> [Int] -> [Int]
 removeAll el [] = []
 removeAll el (x:xs)
  | x == el = removeAll el xs
- | otherwise = [x] ++ removeAll el xs 
+ | otherwise = x : removeAll el xs 

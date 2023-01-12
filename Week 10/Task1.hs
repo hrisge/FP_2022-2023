@@ -7,4 +7,4 @@ main = do
 
 isPresent :: Int -> [Int] -> Bool
 isPresent el [] = False
-isPresent el (x:xs) = el==x || isPresent el xs    
+isPresent el (x:xs) = el == x || isPresent el xs    
